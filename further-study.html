@@ -43,40 +43,45 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery.js"></script>
+
 <script>
 
-    var myImage = document.getElementById("coffee_image");
+    // var myImage = document.getElementById("coffee_image");
     var myRevenueMessage = document.getElementById("revenue");
+        // myRevenue >> $('#revenue')
 
     var drinksOrdered = [];
 
-    myImage.src = "static/coffee_beans.jpg";
-    myImage.addEventListener('click', function () { return makeCoffee("brew"); });
+    $('#coffee_image').attr('src', "static/coffee_beans.jpg");
+    $('#coffee_image').click(makeCoffee);
 
     // Append the drink_type to drinks_ordered and use console.log to view the output
 
-    function makeCoffee(drinkType) {
-        drinksOrdered.push(drinkType);
+    function makeCoffee(evt) {
+        // console.dir(evt);
+        // global_evt = evt;
+        drinksOrdered.push(evt.target.id);
         console.log(drinksOrdered);
 
         var myRevenue = revenue();
         myRevenueMessage.innerHTML = "Today's revenues: " + myRevenue;
 
-        myImage.setAttribute('src', "static/coffee_machine.jpg");
-        setTimeout(function () { myImage.setAttribute('src', "static/coffee_mug.jpg"); }, 500);
-        setTimeout(function () { myImage.setAttribute('src', "static/coffee_beans.jpg"); }, 1500);
+        $('#coffee_image').attr('src', "static/coffee_machine.jpg");
+        setTimeout(function() { $('#coffee_image').attr('src', "static/coffee_mug.jpg"); }, 1500);
+        setTimeout(function() { $('#coffee_image').attr('src', "static/coffee_beans.jpg"); }, 4500);
     }
 
 
     // Create variables for Espresso, Latte, and Hot Chocolate;
     // and add an event listener to each that calls make_coffee
-    var espresso = document.getElementById("espresso");
-    var latte = document.getElementById("latte");
-    var hotChocolate = document.getElementById("hot-chocolate");
+    $('#espresso').click(makeCoffee);
+    $('#latte').click(makeCoffee);
+    $('#hot-chocolate').click(makeCoffee);
 
-    espresso.addEventListener('click', function () { return makeCoffee("espresso"); });
-    latte.addEventListener('click', function () { return makeCoffee("latte"); });
-    hotChocolate.addEventListener('click', function () { return makeCoffee("hot chocolate"); });
+    // espresso.addEventListener('click', function () { return makeCoffee("espresso"); });
+    // latte.addEventListener('click', function () { return makeCoffee("latte"); });
+    // hotChocolate.addEventListener('click', function () { return makeCoffee("hot chocolate"); });
 
     // Use this dictionary to calculate profits for the day and log them to the console.
 
